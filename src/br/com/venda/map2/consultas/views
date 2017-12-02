@@ -1,0 +1,3 @@
+﻿CREATE VIEW funcionario_view AS SELECT * FROM pessoa WHERE discriminator = 'funcionario';
+
+CREATE VIEW cliente_view AS SELECT * FROM pessoa WHERE discriminator = 'cliente';

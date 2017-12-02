@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="743.0" style="-fx-background-color: #3d3d3d;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.venda.map2.view.ViewCadastroItemController">
+   <center>
+      <Pane prefHeight="374.0" prefWidth="743.0" style="-fx-background-color: #3d3d3d;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="217.0" prefWidth="743.0" spacing="10.0" style="-fx-background-color: #3d3d3d;">
+               <children>
+                  <Pane prefHeight="137.0" prefWidth="723.0" style="-fx-background-color: #3d3d3d;">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <VBox prefHeight="139.0" prefWidth="724.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="89.0" prefWidth="724.0" spacing="10.0">
+                                 <children>
+                                    <JFXTextField fx:id="tfNome" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="nome" />
+                                    <JFXTextField fx:id="tfPreco" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="valor item (R$)" />
+                                    <JFXTextField fx:id="tfPrecovenda" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="valor venda (R$)" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="78.0" prefWidth="724.0" spacing="10.0">
+                                 <children>
+                                    <JFXComboBox fx:id="cbFornecedor" focusColor="#1ed760" prefHeight="30.0" prefWidth="220.0" promptText="fornecedor" />
+                                    <JFXDatePicker fx:id="dtValidade" defaultColor="#1ed760" prefHeight="30.0" prefWidth="220.0" promptText="validade" />
+                                    <JFXTextField fx:id="tfQuantidade" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="quantidade" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="723.0" spacing="60.0">
+                     <children>
+                        <JFXButton fx:id="btnCadastrar" buttonType="RAISED" onAction="#cadastrarAndEditar" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #1ed760;" text="cadastrar" textFill="WHITE" />
+                        <JFXToggleButton fx:id="tbEditar" onAction="#setEditable" text="editar" textFill="WHITE" toggleColor="#1ed760">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets top="-10.0" />
+                           </padding>
+                        </JFXToggleButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets right="80.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="1132.0" style="-fx-background-color: #3d3d3d;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.venda.map2.view.ViewLoginController">
+   <center>
+      <Pane prefHeight="631.0" prefWidth="1132.0" style="-fx-background-color: #3d3d3d;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutX="366.0" layoutY="198.0" prefHeight="235.0" prefWidth="400.0">
+               <children>
+                  <VBox alignment="CENTER" focusTraversable="true" prefHeight="235.0" prefWidth="400.0" spacing="20.0">
+                     <children>
+                        <JFXTextField fx:id="tfLogin" focusColor="#1ed760" labelFloat="true" promptText="login" style="-fx-text-fill: black;">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXPasswordField fx:id="tfSenha" focusColor="#1ed760" labelFloat="true" promptText="senha" style="-fx-text-fill: black;">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </JFXPasswordField>
+                        <JFXButton onAction="#logar" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #1ed760;" text="entrar" textFill="WHITE" />
+                        <Label onMouseClicked="#cadastrar_Se" text="cadastrar-se" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

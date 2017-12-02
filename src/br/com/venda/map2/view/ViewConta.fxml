@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="1132.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.venda.map2.view.ViewContaController">
+    <center>
+        <Pane prefHeight="631.0" prefWidth="973.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="631.0" prefWidth="1132.0">
+                    <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <VBox prefHeight="631.0" prefWidth="200.0">
+                                    <children>
+                                        <Pane prefHeight="166.0" prefWidth="200.0" style="-fx-background-color: #3d3d3d;">
+                                 <children>
+                                    <Pane layoutX="50.0" layoutY="33.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #4d4d4d; -fx-background-radius: 50;">
+                                       <children>
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../res/img/icons8-user-96-white.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                       </padding>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </Pane>
+                                    <Label fx:id="lbName" alignment="CENTER" layoutY="144.0" prefHeight="16.0" prefWidth="200.0" textFill="WHITE" />
+                                 </children></Pane>
+                                        <Pane prefHeight="465.0" prefWidth="200.0">
+                                            <children>
+                                                <VBox alignment="TOP_CENTER" focusTraversable="true" prefHeight="465.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: #3d3d3d;">
+                                                    <padding>
+                                                        <Insets top="10.0" />
+                                                    </padding>
+                                                    <children>
+                                                        <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" onAction="#showPaneCliente" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1ED760;" text="cliente" textFill="WHITE" />
+                                                        <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" onAction="#showPaneFuncionario" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1ED760;" text="funcionario" textFill="WHITE" />
+                                                        <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" onAction="#showPaneFornecedor" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1ED760;" text="fornecedor" textFill="WHITE" />
+                                                        <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" onAction="#showPaneItem" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1ED760;" text="item" textFill="WHITE" />
+                                                        <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" onAction="#showPaneVenda" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1ED760;" text="venda" textFill="WHITE" />
+                                                        <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" onAction="#showPaneLogin" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1ED760;" text="sair" textFill="WHITE">
+                                                            <VBox.margin>
+                                                                <Insets top="215.0" />
+                                                            </VBox.margin>
+                                                        </JFXButton>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </VBox>
+                            </children>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Pane>
+                        <Pane prefHeight="631.0" prefWidth="932.0">
+                     <children>
+                        <Pane fx:id="paneCliente" prefHeight="631.0" prefWidth="932.0" visible="false">
+                           <children>
+                              <VBox prefHeight="631.0" prefWidth="932.0" spacing="50.0">
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="115.0" prefWidth="932.0" spacing="15.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" onAction="#showCadCliente" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="cadastrar cliente" textFill="WHITE" />
+                                          <JFXButton buttonType="RAISED" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="Excluir cliente" textFill="WHITE" />
+                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar cliente (nome)">
+                                             <HBox.margin>
+                                                <Insets left="180.0" top="25.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="tableCliente" prefHeight="454.0" prefWidth="932.0">
+                                       <columns>
+                                          <TableColumn fx:id="colunaClienteNome" prefWidth="594.0" resizable="false" text="nome" />
+                                          <TableColumn fx:id="colunaClienteQunt" minWidth="0.0" prefWidth="297.0" resizable="false" text="quant. compras" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneFuncionario" prefHeight="631.0" prefWidth="932.0" visible="false">
+                           <children>
+                              <VBox prefHeight="631.0" prefWidth="932.0" spacing="50.0">
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="115.0" prefWidth="932.0" spacing="15.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" onAction="#showCadFuncionario" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="cadastrar funcionario" textFill="WHITE" />
+                                          <JFXButton buttonType="RAISED" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="Excluir funcionario" textFill="WHITE" />
+                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar funcinario (nome)">
+                                             <HBox.margin>
+                                                <Insets left="180.0" top="25.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="tableFuncionario" prefHeight="454.0" prefWidth="932.0">
+                                      <columns>
+                                        <TableColumn fx:id="colunaFuncionarioNome" prefWidth="594.0" resizable="false" text="nome" />
+                                        <TableColumn fx:id="colunaFuncionarioLogin" minWidth="0.0" prefWidth="297.0" resizable="false" text="login" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneFornecedor" prefHeight="631.0" prefWidth="932.0" visible="false">
+                           <children>
+                              <VBox prefHeight="631.0" prefWidth="932.0" spacing="50.0">
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="115.0" prefWidth="932.0" spacing="15.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" onAction="#showCadFornecedor" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="cadastrar fornecedor" textFill="WHITE" />
+                                          <JFXButton buttonType="RAISED" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="Excluir fornecedor" textFill="WHITE" />
+                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar funcinario (nome)">
+                                             <HBox.margin>
+                                                <Insets left="180.0" top="25.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="tableFornecedor" prefHeight="454.0" prefWidth="932.0">
+                                       <columns>
+                                          <TableColumn fx:id="colunaFornecedorNome" prefWidth="594.0" resizable="false" text="nome" />
+                                          <TableColumn fx:id="colunaFornecedorCnpj" minWidth="0.0" prefWidth="297.0" resizable="false" text="cnpj" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneItem" prefHeight="631.0" prefWidth="932.0" visible="false">
+                           <children>
+                              <VBox prefHeight="631.0" prefWidth="932.0" spacing="50.0">
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="115.0" prefWidth="932.0" spacing="15.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" onAction="#showCadItem" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="cadastrar item" textFill="WHITE" />
+                                          <JFXButton buttonType="RAISED" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="Excluir item" textFill="WHITE" />
+                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar item (nome)">
+                                             <HBox.margin>
+                                                <Insets left="180.0" top="25.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="tableItem" prefHeight="454.0" prefWidth="932.0">
+                                       <columns>
+                                          <TableColumn fx:id="colunaItemNome" prefWidth="594.0" resizable="false" text="nome" />
+                                          <TableColumn fx:id="colunaItemEstq" minWidth="0.0" prefWidth="297.0" resizable="false" text="quant. estoque" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneVenda" prefHeight="631.0" prefWidth="932.0" visible="false">
+                           <children>
+                              <VBox prefHeight="631.0" prefWidth="932.0" spacing="50.0">
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="115.0" prefWidth="932.0" spacing="15.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" onAction="#showCadVenda" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="registrar venda" textFill="WHITE" />
+                                          <JFXButton buttonType="RAISED" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="visualizar venda" textFill="WHITE" />
+                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar venda (nome cliente)">
+                                             <HBox.margin>
+                                                <Insets left="180.0" top="25.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="tableVenda" prefHeight="454.0" prefWidth="932.0">
+                                       <columns>
+                                          <TableColumn fx:id="colunaVendaNomeCliente" prefWidth="517.0" resizable="false" text="nome cliente" />
+                                          <TableColumn fx:id="colunaVendaData" minWidth="0.0" prefWidth="220.0" resizable="false" text="data" />
+                                          <TableColumn fx:id="colunaVendaValor" minWidth="0.0" prefWidth="154.0" resizable="false" text="valor (R$)" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children></Pane>
+                    </children>
+                </HBox>
+            </children>
+        </Pane>
+    </center>
+</BorderPane>

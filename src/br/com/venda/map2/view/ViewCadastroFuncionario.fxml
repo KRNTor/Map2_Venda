@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="477.0" maxWidth="801.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.venda.map2.view.ViewCadastroFuncionarioController">
+    <center>
+        <Pane prefHeight="477.0" prefWidth="801.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="TOP_CENTER" prefHeight="487.0" prefWidth="811.0" spacing="10.0" style="-fx-background-color: #3d3d3d;">
+                    <children>
+                        <Pane prefHeight="88.0" prefWidth="743.0" style="-fx-background-color: #3d3d3d;">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                            <children>
+                                <Label layoutX="4.0" layoutY="4.0" text="informaçoes: conta" textFill="WHITE" />
+                                <HBox alignment="CENTER" focusTraversable="true" layoutY="26.0" prefHeight="68.0" prefWidth="782.0" spacing="10.0">
+                                    <children>
+                                        <JFXTextField fx:id="tflogin" focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="283.0" promptText="login" style="-fx-text-fill: black;" />
+                                        <JFXPasswordField fx:id="tfsenha" focusColor="#1ed760" labelFloat="true" prefWidth="283.0" promptText="senha" style="-fx-text-fill: black;" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0" />
+                                    </padding>
+                                </HBox>
+                            </children>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Pane>
+                        <Pane prefHeight="130.0" prefWidth="723.0" style="-fx-background-color: #3d3d3d;">
+                            <children>
+                                <Label layoutX="4.0" layoutY="4.0" text="informaçoes: funcionario" textFill="WHITE" />
+                                <HBox alignment="TOP_CENTER" focusTraversable="true" layoutY="26.0" prefHeight="48.0" prefWidth="781.0" spacing="10.0">
+                                    <children>
+                                        <JFXTextField fx:id="tfnome" focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="283.0" promptText="nome" style="-fx-text-fill: black;" />
+                                        <JFXTextField fx:id="tfcpf" focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="170.0" promptText="cpf" />
+                                        <JFXDatePicker fx:id="dtNascimento" defaultColor="#1ed760" promptText="data de nascimento" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox alignment="TOP_CENTER" focusTraversable="true" layoutY="74.0" prefHeight="48.0" prefWidth="781.0" spacing="10.0">
+                                    <children>
+                                        <JFXTextField fx:id="tffuncao" focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="283.0" promptText="função" style="-fx-text-fill: black;" />
+                                        <JFXTextField fx:id="tfsalario" focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="170.0" promptText="salario (R$)" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0" />
+                                    </padding>
+                                </HBox>
+                            </children>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Pane>
+                        <Pane prefHeight="174.0" prefWidth="723.0" style="-fx-background-color: #3d3d3d;">
+                            <children>
+                                <Label layoutX="4.0" layoutY="4.0" text="informaçoes: endereço" textFill="WHITE" />
+                                <VBox layoutY="27.0" prefHeight="148.0" prefWidth="782.0">
+                                    <children>
+                                        <HBox alignment="CENTER" prefHeight="74.0" prefWidth="723.0" spacing="10.0">
+                                            <children>
+                                                <JFXTextField fx:id="tfcep" focusColor="#1ed760" labelFloat="true" prefWidth="200.0" promptText="cep" />
+                                                <JFXTextField fx:id="tfbairro" focusColor="#1ed760" labelFloat="true" prefWidth="200.0" promptText="bairro" />
+                                                <JFXTextField fx:id="tfrua" focusColor="#1ed760" labelFloat="true" prefWidth="200.0" promptText="rua" />
+                                                <JFXTextField fx:id="tfcidade" focusColor="#1ed760" labelFloat="true" prefWidth="200.0" promptText="cidade" />
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefHeight="74.0" prefWidth="723.0" spacing="10.0">
+                                            <children>
+                                                <JFXTextField fx:id="tfcomplemento" focusColor="#1ed760" labelFloat="true" prefWidth="200.0" promptText="complemento" />
+                                                <JFXTextField fx:id="tfuf" focusColor="#1ed760" labelFloat="true" prefWidth="200.0" promptText="uf" />
+                                                <JFXTextField fx:id="tfnumero" focusColor="#1ed760" labelFloat="true" prefWidth="200.0" promptText="número" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                        </Pane>
+                        <JFXButton fx:id="btnCadastrar" buttonType="RAISED" onAction="#cadastrar" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #1ed760#1ed760;" text="cadastrar" textFill="WHITE" />
+                    </children>
+                    <padding>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </Pane>
+    </center>
+</BorderPane>
