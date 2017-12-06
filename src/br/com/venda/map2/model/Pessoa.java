@@ -42,9 +42,11 @@ public class Pessoa {
     private Date dataNascimento;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Endereco endereco;
+    private boolean status;
 
     public Pessoa() {
-        endereco = new Endereco();
+        this.endereco = new Endereco();
+        this.status = true;
     }
 
     public long getId() {
@@ -85,6 +87,14 @@ public class Pessoa {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override

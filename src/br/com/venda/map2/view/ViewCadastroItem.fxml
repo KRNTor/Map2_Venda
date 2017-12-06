@@ -30,16 +30,16 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="89.0" prefWidth="724.0" spacing="10.0">
                                  <children>
-                                    <JFXTextField fx:id="tfNome" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="nome" />
-                                    <JFXTextField fx:id="tfPreco" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="valor item (R$)" />
-                                    <JFXTextField fx:id="tfPrecovenda" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="valor venda (R$)" />
+                                    <JFXTextField fx:id="tfNome" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="nome" style="-fx-text-fill: #000;" />
+                                    <JFXTextField fx:id="tfPreco" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="valor item (R$)" style="-fx-text-fill: #000;" />
+                                    <JFXTextField fx:id="tfPrecovenda" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="valor venda (R$)" style="-fx-text-fill: #000;" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="78.0" prefWidth="724.0" spacing="10.0">
                                  <children>
-                                    <JFXComboBox fx:id="cbFornecedor" focusColor="#1ed760" prefHeight="30.0" prefWidth="220.0" promptText="fornecedor" />
-                                    <JFXDatePicker fx:id="dtValidade" defaultColor="#1ed760" prefHeight="30.0" prefWidth="220.0" promptText="validade" />
-                                    <JFXTextField fx:id="tfQuantidade" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="quantidade" />
+                                    <JFXComboBox fx:id="cbFornecedor" focusColor="#1ed760" prefHeight="30.0" prefWidth="220.0" promptText="fornecedor" style="-fx-text-fill: #000;" />
+                                    <JFXDatePicker fx:id="dtValidade" defaultColor="#1ed760" prefHeight="30.0" prefWidth="220.0" promptText="validade" style="-fx-text-fill: #000;" />
+                                    <JFXTextField fx:id="tfQuantidade" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="220.0" promptText="quantidade" style="-fx-text-fill: #000;" />
                                  </children>
                               </HBox>
                            </children>

@@ -5,7 +5,7 @@
  */
 package br.com.venda.map2.modelGeneric;
 
-import br.com.venda.map2.model.Item;
+import br.com.venda.map2.model.ItemVenda;
 
 /**
  *
@@ -17,7 +17,7 @@ public class GenericItemVendaController {
 
     }
 
-    public GenericItemVenda parseItem(Item item, String qunt) {
-        return new GenericItemVenda(item, qunt);
+    public GenericItemVenda parseItem(ItemVenda item) {
+        return new GenericItemVenda(item);
     }
 }

@@ -82,11 +82,25 @@ public class DaoGenericImpl<T> implements IDaoGeneric<T> {
     }
 
     @Override
+    public List<T> getListByName(String nome) throws DAOException {
+        List<T> resultado = null;
+        try {
+            Criteria criteria = getCriteria();
+            criteria.add(Restrictions.eq("nome", "%" + nome + "%"));
+            resultado = (List<T>) criteria.list();
+            return resultado;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DAOException("");
+        }
+    }
+
+    @Override
     public List<T> getAll() throws DAOException {
         List<T> resultado = null;
         try {
-            Criteria criteria = getCriteria();//select * from pessoa orderBy id;
-            criteria.addOrder(Order.asc("id")); //orderBy id;
+            Criteria criteria = getCriteria();
+            criteria.addOrder(Order.asc("id"));
             resultado = (List<T>) criteria.list();
             return resultado;
         } catch (Exception e) {

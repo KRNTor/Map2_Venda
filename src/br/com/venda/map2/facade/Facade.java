@@ -46,6 +46,10 @@ public class Facade {
         return this.daoCliente.getByName(nome);
     }
 
+    public List<Cliente> getClienteListByName(String nome) throws DAOException {
+        return this.daoCliente.getListByName(nome);
+    }
+
     public List<Cliente> getAllCliente() throws DAOException, DAOException, DAOException {
         return this.daoCliente.getAll();
     }
@@ -116,8 +120,8 @@ public class Facade {
     public Funcionario getFuncionarioByLogin(String login, String senha) throws DAOException {
         return this.daoFuncionario.getByLogin(login, senha);
     }
-    
-     public Funcionario getFuncionarioByName(String nome) throws DAOException {
+
+    public Funcionario getFuncionarioByName(String nome) throws DAOException {
         return this.daoFuncionario.getByName(nome);
     }
 

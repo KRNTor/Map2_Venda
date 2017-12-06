@@ -14,6 +14,8 @@ public interface IDaoGeneric<T> {
 
     T getById(Long id) throws DAOException;
 
+    List<T> getListByName(String nome) throws DAOException;
+
     List<T> getAll() throws DAOException;
 
     Criteria getCriteria();

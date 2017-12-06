@@ -32,7 +32,7 @@ public class Cliente extends Pessoa {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + getId() + ", qtdCompras=" + qtdCompras + '}';
+        return "Cliente{" + "id=" + getId() + ", nome: " + getNome() + ", qunatidade" + qtdCompras + '}';
     }
 
 }

@@ -6,26 +6,16 @@
 package br.com.venda.map2.view;
 
 import br.Main;
+import br.com.venda.map2.exception.DAOException;
 import br.com.venda.map2.facade.Facade;
-import br.com.venda.map2.model.Cliente;
-import br.com.venda.map2.model.Fornecedor;
-import br.com.venda.map2.model.Funcionario;
-import br.com.venda.map2.model.Item;
-import br.com.venda.map2.model.Pessoa;
-import br.com.venda.map2.model.Venda;
-import br.com.venda.map2.modelGeneric.GenericCliente;
-import br.com.venda.map2.modelGeneric.GenericClienteController;
-import br.com.venda.map2.modelGeneric.GenericFornecedor;
-import br.com.venda.map2.modelGeneric.GenericFornecedorController;
-import br.com.venda.map2.modelGeneric.GenericFuncionario;
-import br.com.venda.map2.modelGeneric.GenericFuncionarioController;
-import br.com.venda.map2.modelGeneric.GenericItem;
-import br.com.venda.map2.modelGeneric.GenericItemController;
-import br.com.venda.map2.modelGeneric.GenericVenda;
-import br.com.venda.map2.modelGeneric.GenericVendaController;
+import br.com.venda.map2.model.*;
+import br.com.venda.map2.modelGeneric.*;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -101,6 +92,14 @@ public class ViewContaController implements Initializable {
     private TableColumn<GenericVenda, String> colunaVendaNomeCliente;
     @FXML
     private TableColumn<GenericVenda, String> colunaVendaValor;
+    @FXML
+    private JFXTextField tfBuscaCliente;
+    @FXML
+    private JFXTextField tfBuscaFuncionario;
+    @FXML
+    private JFXTextField tfBuscaFornecedor;
+    @FXML
+    private JFXTextField tfBuscaItem;
 
     private Stage stage;
     private Funcionario func;
@@ -240,7 +239,33 @@ public class ViewContaController implements Initializable {
                         try {
                             GenericCliente rowData = row.getItem();
                             Cliente cliente = this.fac.getClienteByName(rowData.getNome());
-                            System.out.println("clietne: " + cliente);
+                            Main.showStageCadastrarCliente(cliente);
+                        } catch (Exception ex) {
+                            Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+                return row;
+            });
+        } catch (Exception ex) {
+            Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void repreencherTableCliente(List<Cliente> lista) {
+        try {
+            this.colunaClienteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+            this.colunaClienteQunt.setCellValueFactory(new PropertyValueFactory<>("qunt"));
+            this.olCl = FXCollections.observableArrayList(this.controllerCl.listarAll(lista));
+            this.tableCliente.setItems(null);
+            this.tableCliente.setItems(this.olCl);
+            this.tableCliente.setRowFactory(tv -> {
+                TableRow<GenericCliente> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        try {
+                            GenericCliente rowData = row.getItem();
+                            Cliente cliente = this.fac.getClienteByName(rowData.getNome());
                             Main.showStageCadastrarCliente(cliente);
                         } catch (Exception ex) {
                             Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -337,10 +362,19 @@ public class ViewContaController implements Initializable {
 
     private void preencherTableVenda() {
         try {
+            List<Venda> vendas = new ArrayList<>();
+            for (Venda v : this.fac.getAllVenda()) {
+                if (vendas.isEmpty()) {
+                    vendas.add(v);
+                }
+                if (!vendas.contains(v)) {
+                    vendas.add(v);
+                }
+            }
             this.colunaVendaData.setCellValueFactory(new PropertyValueFactory<>("data"));
             this.colunaVendaNomeCliente.setCellValueFactory(new PropertyValueFactory<>("nome_cliente"));
             this.colunaVendaValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
-            this.olVenda = FXCollections.observableArrayList(this.controllerVenda.listarAll(this.fac.getAllVenda()));
+            this.olVenda = FXCollections.observableArrayList(this.controllerVenda.listarAll(vendas));
             this.tableVenda.setItems(null);
             this.tableVenda.setItems(this.olVenda);
             this.tableVenda.setRowFactory(tv -> {
@@ -360,6 +394,85 @@ public class ViewContaController implements Initializable {
             });
         } catch (Exception ex) {
             Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    public void deleteClienteRow() {
+        try {
+            if (this.tableCliente.getSelectionModel().getSelectedItem() != null) {
+                Cliente cliente = this.fac.getClienteByName(this.tableCliente.getSelectionModel().getSelectedItem().getNome());
+                int value = JOptionPane.showConfirmDialog(null, "deseja mesmo excluir o cliente: " + cliente.getNome() + "?");
+                if (value == 0) {
+                    cliente.setStatus(false);
+                    this.fac.updateCliente(cliente);
+                }
+            }
+            preencherTableCliente();
+        } catch (DAOException ex) {
+            Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    public void deleteFuncionarioRow() {
+        try {
+            if (this.tableFuncionario.getSelectionModel().getSelectedItem() != null) {
+                Funcionario func = this.fac.getFuncionarioByName(this.tableFuncionario.getSelectionModel().getSelectedItem().getNome());
+                int value = JOptionPane.showConfirmDialog(null, "deseja mesmo excluir o funcionario: " + func.getNome().toUpperCase() + "?");
+                if (value == 0) {
+                    func.setStatus(false);
+                    this.fac.updateFuncionario(func);
+                }
+            }
+            preencherTableFuncionario();
+        } catch (DAOException ex) {
+            Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    public void deleteFornecedorRow() {
+        try {
+            if (this.tableFornecedor.getSelectionModel().getSelectedItem() != null) {
+                Fornecedor fornecedor = this.fac.getFornecedorByName(this.tableFornecedor.getSelectionModel().getSelectedItem().getNome());
+                int value = JOptionPane.showConfirmDialog(null, "deseja mesmo excluir o Fornecedor: " + fornecedor.getNome().toUpperCase() + "?");
+                if (value == 0) {
+                    fornecedor.setStatus(false);
+                    this.fac.updateFornecedor(fornecedor);
+                }
+            }
+            preencherTableFornecedor();
+        } catch (DAOException ex) {
+            Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    public void deleteItemRow() {
+        try {
+            if (this.tableItem.getSelectionModel().getSelectedItem() != null) {
+                Item item = this.fac.getItemByName(this.tableItem.getSelectionModel().getSelectedItem().getNome());
+                int value = JOptionPane.showConfirmDialog(null, "deseja mesmo excluir o Item: " + item.getNome() + "?");
+                if (value == 0) {
+                    item.setStatus(false);
+                    this.fac.updateItem(item);
+                }
+            }
+            preencherTableItem();
+        } catch (DAOException ex) {
+            Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    public void searchByName() {
+        if (!this.tfBuscaCliente.getText().equals("")) {
+            try {
+                repreencherTableCliente(this.fac.getClienteListByName(this.tfBuscaCliente.getText()));
+            } catch (DAOException ex) {
+                Logger.getLogger(ViewContaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

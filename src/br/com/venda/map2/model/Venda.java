@@ -6,6 +6,7 @@
 package br.com.venda.map2.model;
 
 import br.com.venda.map2.prototype.IPrototype;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -31,23 +32,22 @@ public class Venda implements IPrototype<Venda> {
     private long id;
     @OneToOne
     private Cliente cliente;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Item> itens;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ItemVenda> itens;
     @OneToOne(fetch = FetchType.EAGER)
     private Funcionario funcionario;
-    private String modoDePagamento;
     @Temporal(TemporalType.DATE)
     private Date dtVenda;
     private double valor;
 
     public Venda() {
+        this.itens = new ArrayList<>();
     }
 
-    public Venda(Cliente cliente, List<Item> itens, Funcionario funcionario, String modoDePagamento, Date dtVenda, double valor) {
+    public Venda(Cliente cliente, List<ItemVenda> itens, Funcionario funcionario, String modoDePagamento, Date dtVenda, double valor) {
         this.cliente = cliente;
         this.itens = itens;
         this.funcionario = funcionario;
-        this.modoDePagamento = modoDePagamento;
         this.dtVenda = dtVenda;
         this.valor = valor;
     }
@@ -68,11 +68,11 @@ public class Venda implements IPrototype<Venda> {
         this.cliente = cliente;
     }
 
-    public List<Item> getItem() {
+    public List<ItemVenda> getItem() {
         return itens;
     }
 
-    public void setItem(List<Item> itens) {
+    public void setItem(List<ItemVenda> itens) {
         this.itens = itens;
     }
 
@@ -82,14 +82,6 @@ public class Venda implements IPrototype<Venda> {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-    }
-
-    public String getModoDePagamento() {
-        return modoDePagamento;
-    }
-
-    public void setModoDePagamento(String modoDePagamento) {
-        this.modoDePagamento = modoDePagamento;
     }
 
     public Date getDtVenda() {
@@ -106,6 +98,11 @@ public class Venda implements IPrototype<Venda> {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    @Override
+    public String toString() {
+        return "Venda{" + "id=" + id + ", cliente=" + cliente + ", itens=" + itens + ", funcionario=" + funcionario + ", dtVenda=" + dtVenda + ", valor=" + valor + "}\n";
     }
 
     @Override

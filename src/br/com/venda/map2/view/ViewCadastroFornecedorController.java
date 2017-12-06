@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -69,6 +70,7 @@ public class ViewCadastroFornecedorController implements Initializable {
                 end.setNumero(Integer.valueOf(this.tfnumero.getText()));
                 f.setEndereco(end);
                 this.fa.saveFornecedor(f);
+                JOptionPane.showMessageDialog(null, "fornecedor cadastrado com sucesso!");
                 this.stage.close();
             }
             if (btnCadastrar.getText().equalsIgnoreCase("editar")) {
@@ -83,6 +85,7 @@ public class ViewCadastroFornecedorController implements Initializable {
                 end.setNumero(Integer.valueOf(this.tfnumero.getText()));
                 fornecedor.setEndereco(end);
                 this.fa.saveFornecedor(fornecedor);
+                JOptionPane.showMessageDialog(null, "funcionario editado com sucesso!");
                 this.stage.close();
             }
         } catch (DAOException ex) {
@@ -106,15 +109,15 @@ public class ViewCadastroFornecedorController implements Initializable {
 
     private void fillAndLock(Fornecedor fornecedor) {
         if (fornecedor != null) {
-            tfnome.setText(fornecedor.getNome());
-            tfcnpj.setText(fornecedor.getCnpj());
-            tfrua.setText(fornecedor.getEndereco().getRua());
-            tfbairro.setText(fornecedor.getEndereco().getBairro());
-            tfcep.setText(fornecedor.getEndereco().getCep());
-            tfuf.setText(fornecedor.getEndereco().getUF());
-            tfcidade.setText(fornecedor.getEndereco().getCidade());
-            tfcomplemento.setText(fornecedor.getEndereco().getComplemento());
-            tfnumero.setText(String.valueOf(fornecedor.getEndereco().getNumero()));
+            this.tfnome.setText(fornecedor.getNome());
+            this.tfcnpj.setText(fornecedor.getCnpj());
+            this.tfrua.setText(fornecedor.getEndereco().getRua());
+            this.tfbairro.setText(fornecedor.getEndereco().getBairro());
+            this.tfcep.setText(fornecedor.getEndereco().getCep());
+            this.tfuf.setText(fornecedor.getEndereco().getUF());
+            this.tfcidade.setText(fornecedor.getEndereco().getCidade());
+            this.tfcomplemento.setText(fornecedor.getEndereco().getComplemento());
+            this.tfnumero.setText(String.valueOf(fornecedor.getEndereco().getNumero()));
             this.btnCadastrar.setText("editar");
             //--------------lock--------------
             this.tfnome.setEditable(false);
@@ -126,13 +129,13 @@ public class ViewCadastroFornecedorController implements Initializable {
             this.tfcomplemento.setEditable(false);
             this.tfuf.setEditable(false);
             this.tfrua.setEditable(false);
-//            this.tbEditar.setVisible(true);
+            this.tbEditar.setVisible(true);
         }
     }
 
     @FXML
     private void setEditable() {
-//        if (this.tbEditar.isSelected()) {
+        if (this.tbEditar.isSelected()) {
             this.tfnome.setEditable(true);
             this.tfcnpj.setEditable(true);
             this.tfbairro.setEditable(true);
@@ -142,21 +145,17 @@ public class ViewCadastroFornecedorController implements Initializable {
             this.tfcomplemento.setEditable(true);
             this.tfuf.setEditable(true);
             this.tfrua.setEditable(true);
-//        } else {
-//            this.tfnome.setEditable(false);
-//            this.tfcnpj.setEditable(false);
-//            this.tfbairro.setEditable(false);
-//            this.tfcep.setEditable(false);
-//            this.tfcidade.setEditable(false);
-//            this.tfnumero.setEditable(false);
-//            this.tfcomplemento.setEditable(false);
-//            this.tfuf.setEditable(false);
-//            this.tfrua.setEditable(false);
-//        }
-
+        } else {
+            this.tfnome.setEditable(false);
+            this.tfcnpj.setEditable(false);
+            this.tfbairro.setEditable(false);
+            this.tfcep.setEditable(false);
+            this.tfcidade.setEditable(false);
+            this.tfnumero.setEditable(false);
+            this.tfcomplemento.setEditable(false);
+            this.tfuf.setEditable(false);
+            this.tfrua.setEditable(false);
+        }
     }
 
-    private void excluirFornecedor(Fornecedor fornecedor) throws DAOException {
-        fa.removeFornecedor(fornecedor);
-    }
 }

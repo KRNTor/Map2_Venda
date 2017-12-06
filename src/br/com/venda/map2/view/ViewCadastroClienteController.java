@@ -14,6 +14,8 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -121,8 +123,7 @@ public class ViewCadastroClienteController {
             //--------------fill--------------
             this.tfnome.setText(cliente.getNome());
             this.tfcpf.setText(cliente.getCpf());
-            //Não consegui converter essa porra em String!!!!!!!!!
-//            this.tfdtNascimento.setText(String.valueOf(cliente.getDataNascimento()));
+            this.dtNascimento.setValue(LOCAL_DATE(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getDataNascimento())));
             this.tfrua.setText(cliente.getEndereco().getRua());
             this.tfbairro.setText(cliente.getEndereco().getBairro());
             this.tfcep.setText(cliente.getEndereco().getCep());
@@ -142,38 +143,39 @@ public class ViewCadastroClienteController {
             this.tfcomplemento.setEditable(true);
             this.tfuf.setEditable(true);
             this.tfrua.setEditable(true);
-            //Ficou faltando a data que essa porra não da pra mexer com DATE!!!!!
-//            this.tbEditar.setVisible(true);
+            this.tbEditar.setVisible(true);
         }
     }
 
     //Ficou faltando mexer com as DATAS!!!!!    
     @FXML
     private void setEditable() {
-//        if (this.tbEditar.isSelected()) {
-//            this.tfnome.setEditable(true);
-//            this.tfcpf.setEditable(true);
-//            this.tfbairro.setEditable(true);
-//            this.tfcep.setEditable(true);
-//            this.tfcidade.setEditable(true);
-//            this.tfnumero.setEditable(true);
-//            this.tfcomplemento.setEditable(true);
-//            this.tfuf.setEditable(true);
-//            this.tfrua.setEditable(true);
-//        } else {
-//            this.tfnome.setEditable(false);
-//            this.tfcpf.setEditable(false);
-//            this.tfbairro.setEditable(false);
-//            this.tfcep.setEditable(false);
-//            this.tfcidade.setEditable(false);
-//            this.tfnumero.setEditable(false);
-//            this.tfcomplemento.setEditable(false);
-//            this.tfuf.setEditable(false);
-//            this.tfrua.setEditable(false);
-//        }
+        if (this.tbEditar.isSelected()) {
+            this.tfnome.setEditable(true);
+            this.tfcpf.setEditable(true);
+            this.tfbairro.setEditable(true);
+            this.tfcep.setEditable(true);
+            this.tfcidade.setEditable(true);
+            this.tfnumero.setEditable(true);
+            this.tfcomplemento.setEditable(true);
+            this.tfuf.setEditable(true);
+            this.tfrua.setEditable(true);
+        } else {
+            this.tfnome.setEditable(false);
+            this.tfcpf.setEditable(false);
+            this.tfbairro.setEditable(false);
+            this.tfcep.setEditable(false);
+            this.tfcidade.setEditable(false);
+            this.tfnumero.setEditable(false);
+            this.tfcomplemento.setEditable(false);
+            this.tfuf.setEditable(false);
+            this.tfrua.setEditable(false);
+        }
     }
 
-    private void excluirCliente(Cliente cliente) throws DAOException {
-        fa.removeCliente(cliente);
+    private static LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
     }
 }

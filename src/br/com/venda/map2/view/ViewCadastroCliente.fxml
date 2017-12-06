@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.venda.map2.view.ViewCadastroClienteController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.venda.map2.view.ViewCadastroClienteController">
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #3d3d3d;" BorderPane.alignment="CENTER">
          <children>
@@ -26,7 +27,7 @@
                            <children>
                               <JFXTextField fx:id="tfnome" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="nome" style="-fx-text-fill: #000;" />
                               <JFXTextField fx:id="tfcpf" focusColor="#1ed760" labelFloat="true" prefHeight="30.0" prefWidth="200.0" promptText="cpf" style="-fx-text-fill: #000;" />
-                              <JFXDatePicker fx:id="dtNascimento" defaultColor="#1ed760" prefHeight="30.0" prefWidth="200.0" promptText="data de nascimento" />
+                              <JFXDatePicker fx:id="dtNascimento" defaultColor="#1ed760" prefHeight="30.0" prefWidth="200.0" promptText="data de nascimento" style="-fx-fill-text: #000;" />
                            </children>
                         </HBox>
                         <Label layoutX="14.0" layoutY="6.0" text="informaçoes: cliente" textFill="WHITE" />
@@ -58,7 +59,22 @@
                         </HBox>
                      </children>
                   </Pane>
-                  <JFXButton fx:id="btnCadastrar" buttonType="RAISED" onAction="#cadastrar" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #1ed760;" text="cadastrar" textFill="WHITE" />
+                  <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="723.0" spacing="60.0">
+                     <children>
+                        <JFXButton fx:id="btnCadastrar" buttonType="RAISED" onAction="#cadastrar" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #1ed760;" text="cadastrar" textFill="WHITE" />
+                        <JFXToggleButton fx:id="tbEditar" onAction="#setEditable" text="editar" textFill="WHITE" toggleColor="#1ed760">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets top="-10.0" />
+                           </padding>
+                        </JFXToggleButton>
+                     </children>
+                     <padding>
+                        <Insets right="80.0" top="10.0" />
+                     </padding>
+                  </HBox>
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" top="10.0" />

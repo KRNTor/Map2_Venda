@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -77,6 +78,7 @@ public class ViewCadastroItemController implements Initializable {
                 i.setFornecedor(f);
                 i.setQuantidade(Integer.valueOf(this.tfQuantidade.getText()));
                 this.fac.saveItem(i);
+                JOptionPane.showMessageDialog(null, "item cadastrado com sucesso!");
                 this.stage.close();
             }
             if (btnCadastrar.getText().equalsIgnoreCase("editar")) {
@@ -88,6 +90,7 @@ public class ViewCadastroItemController implements Initializable {
                 this.item.setFornecedor(f);
                 this.item.setQuantidade(Integer.valueOf(this.tfQuantidade.getText()));
                 this.fac.updateItem(this.item);
+                JOptionPane.showMessageDialog(null, "item editado com sucesso!");
                 this.stage.close();
             }
         } catch (ParseException ex) {
@@ -152,10 +155,6 @@ public class ViewCadastroItemController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(ViewCadastroItemController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    private void excluirItem(Item item) throws DAOException{
-        fac.removeItem(item);
     }
 
 }

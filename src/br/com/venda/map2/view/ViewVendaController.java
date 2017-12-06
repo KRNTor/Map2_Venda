@@ -10,6 +10,7 @@ import br.com.venda.map2.facade.Facade;
 import br.com.venda.map2.model.Cliente;
 import br.com.venda.map2.model.Funcionario;
 import br.com.venda.map2.model.Item;
+import br.com.venda.map2.model.ItemVenda;
 import br.com.venda.map2.model.Pessoa;
 import br.com.venda.map2.model.Venda;
 import br.com.venda.map2.modelGeneric.GenericItem;
@@ -72,9 +73,12 @@ public class ViewVendaController implements Initializable {
     private String dia;
     private String mes;
     private String ano;
+    private double value = 0;
     private ObservableList<GenericItem> olItem;
     private ObservableList<GenericItemVenda> olItem2;
     private final GenericItemController controllerItem = new GenericItemController();
+    private List<ItemVenda> listaItem = new ArrayList<>();
+    private List<GenericItemVenda> listaGenItem = new ArrayList<>();
 
     @FXML
     public void cadastrar() {
@@ -93,10 +97,12 @@ public class ViewVendaController implements Initializable {
             venda.setCliente(c);
             venda.setDtVenda(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
             venda.setFuncionario(this.func);
-//            venda.setItem(item);
-//            venda.setModoDePagamento(modoDePagamento);
-            venda.setValor(0);
+            venda.setItem(this.listaItem);
+            venda.setValor(Double.valueOf(this.tfValor.getText()));
+            System.out.println("venda " + venda);
             this.fac.saveVenda(venda);
+            JOptionPane.showMessageDialog(null, "venda realizada com sucesso!");
+            this.stage.close();
         } catch (DAOException ex) {
             Logger.getLogger(ViewVendaController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -114,16 +120,19 @@ public class ViewVendaController implements Initializable {
             this.tableItem.setItems(this.olItem);
             this.tableItem.setRowFactory(tv -> {
                 TableRow<GenericItem> row = new TableRow<>();
-                List<GenericItemVenda> lista = new ArrayList<>();
+
                 row.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && (!row.isEmpty())) {
                         try {
                             String qunt = JOptionPane.showInputDialog("informe a quantidade:");
                             GenericItem rowData = row.getItem();
                             Item item = this.fac.getItemByName(rowData.getNome());
-                            lista.add(new GenericItemVenda(item, qunt));
-                            preencherTableItemCart(lista);
-                        } catch (Exception ex) {
+                            ItemVenda iVenda = initItemVenda(item, Integer.valueOf(qunt));
+                            this.listaGenItem.add(new GenericItemVenda(iVenda));
+                            preencherTableItemCart(this.listaGenItem);
+                            this.value = this.value + (item.getPrecoVendaItem() * Integer.valueOf(qunt));
+                            this.tfValor.setText("" + this.value);
+                        } catch (DAOException ex) {
                             Logger.getLogger(ViewVendaController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
@@ -135,8 +144,21 @@ public class ViewVendaController implements Initializable {
         }
     }
 
+    private ItemVenda initItemVenda(Item item, int qunt) {
+        ItemVenda itemVenda = new ItemVenda();
+        itemVenda.setNome(item.getNome());
+        itemVenda.setFornecedor(item.getFornecedor());
+        itemVenda.setPrecoCompraItem(item.getPrecoCompraItem());
+        itemVenda.setPrecoVendaItem(item.getPrecoVendaItem());
+        itemVenda.setQuantidade_saida(qunt);
+        itemVenda.setValidade(item.getValidade());
+        this.listaItem.add(itemVenda);
+        return itemVenda;
+    }
+
     private void preencherTableItemCart(List<GenericItemVenda> listaAux) {
         try {
+            System.out.println("lista: " + listaAux);
             this.colunaItemNome2.setCellValueFactory(new PropertyValueFactory<>("nome"));
             this.colunaItemQunt2.setCellValueFactory(new PropertyValueFactory<>("qunt_cart"));
             this.colunaItemValor2.setCellValueFactory(new PropertyValueFactory<>("valor_und"));

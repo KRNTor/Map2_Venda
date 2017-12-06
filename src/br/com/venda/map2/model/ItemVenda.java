@@ -5,7 +5,6 @@
  */
 package br.com.venda.map2.model;
 
-import br.com.venda.map2.prototype.IPrototype;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +20,7 @@ import javax.persistence.TemporalType;
  * @author Computador
  */
 @Entity
-public class Item implements IPrototype<Item> {
+public class ItemVenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,10 +32,10 @@ public class Item implements IPrototype<Item> {
     private Fornecedor fornecedor;
     @Temporal(TemporalType.DATE)
     private Date validade;
-    private int quantidade;
+    private int quantidade_saida;
     private boolean status;
 
-    public Item() {
+    public ItemVenda() {
         this.status = true;
     }
 
@@ -88,14 +87,6 @@ public class Item implements IPrototype<Item> {
         this.validade = validade;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
     public boolean isStatus() {
         return status;
     }
@@ -104,14 +95,16 @@ public class Item implements IPrototype<Item> {
         this.status = status;
     }
 
-    @Override
-    public Item clone() {
-        return new Item();
+    public int getQuantidade_saida() {
+        return quantidade_saida;
+    }
+
+    public void setQuantidade_saida(int quantidade_saida) {
+        this.quantidade_saida = quantidade_saida;
     }
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", nome=" + nome + ", precoCompraItem=" + precoCompraItem + ", precoVendaItem=" + precoVendaItem + ", fornecedor=" + fornecedor + ", validade=" + validade + ", quantidade=" + quantidade + '}';
+        return "Item{" + "id=" + id + ", nome=" + nome + ", precoCompraItem=" + precoCompraItem + ", precoVendaItem=" + precoVendaItem + ", fornecedor=" + fornecedor + ", validade=" + validade + ", quantidade=" + quantidade_saida + '}';
     }
-
 }

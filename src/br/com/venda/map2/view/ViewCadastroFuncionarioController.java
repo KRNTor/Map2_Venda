@@ -21,6 +21,9 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import br.com.venda.map2.util.CriptografiaUtil;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,9 +61,9 @@ public class ViewCadastroFuncionarioController {
     private JFXTextField tfnumero;
     @FXML
     private JFXButton btnCadastrar;
-
     @FXML
     private JFXToggleButton tbEditar;
+
     private Facade fac = new Facade();
     private String dia;
     private String mes;
@@ -80,39 +83,41 @@ public class ViewCadastroFuncionarioController {
                 this.mes = "11";
                 this.ano = "0002";
             }
-            if (btnCadastrar.getText().equalsIgnoreCase("cadastrar")) {
-                Funcionario f = new Funcionario();
-                f.setNome(this.tfnome.getText());
-                f.setCpf(this.tfcpf.getText());
-                f.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
-                f.setLogin(this.tflogin.getText());
-                f.setSenha(crip(this.tfsenha.getText()));
-                f.getEndereco().setRua(this.tfrua.getText());
-                f.getEndereco().setCep(this.tfcep.getText());
-                f.getEndereco().setBairro(this.tfbairro.getText());
-                f.getEndereco().setCidade(this.tfcidade.getText());
-                f.getEndereco().setComplemento(this.tfcomplemento.getText());
-                f.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
-                f.setSalario(Double.valueOf(this.tfsalario.getText()));
-                f.setFuncao(this.tffuncao.getText());
-                this.fac.saveFuncionario(f);
+            if (this.btnCadastrar.getText().equalsIgnoreCase("cadastrar")) {
+                this.funcionario = new Funcionario();
+                this.funcionario.setNome(this.tfnome.getText());
+                this.funcionario.setCpf(this.tfcpf.getText());
+                this.funcionario.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
+                this.funcionario.setLogin(this.tflogin.getText());
+                this.funcionario.setSenha(crip(this.tfsenha.getText()));
+                this.funcionario.getEndereco().setRua(this.tfrua.getText());
+                this.funcionario.getEndereco().setCep(this.tfcep.getText());
+                this.funcionario.getEndereco().setBairro(this.tfbairro.getText());
+                this.funcionario.getEndereco().setCidade(this.tfcidade.getText());
+                this.funcionario.getEndereco().setComplemento(this.tfcomplemento.getText());
+                this.funcionario.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
+                this.funcionario.setSalario(Double.valueOf(this.tfsalario.getText()));
+                this.funcionario.setFuncao(this.tffuncao.getText());
+                this.fac.saveFuncionario(this.funcionario);
+                JOptionPane.showMessageDialog(null, "funcionario cadastrado com sucesso!");
                 this.stage.close();
             }
-            if (btnCadastrar.getText().equalsIgnoreCase("editar")) {
-                funcionario.setNome(this.tfnome.getText());
-                funcionario.setCpf(this.tfcpf.getText());
-                funcionario.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
-                funcionario.setLogin(this.tflogin.getText());
-                funcionario.setSenha(crip(this.tfsenha.getText()));
-                funcionario.getEndereco().setRua(this.tfrua.getText());
-                funcionario.getEndereco().setCep(this.tfcep.getText());
-                funcionario.getEndereco().setBairro(this.tfbairro.getText());
-                funcionario.getEndereco().setCidade(this.tfcidade.getText());
-                funcionario.getEndereco().setComplemento(this.tfcomplemento.getText());
-                funcionario.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
-                funcionario.setSalario(Double.valueOf(this.tfsalario.getText()));
-                funcionario.setFuncao(this.tffuncao.getText());
-                this.fac.saveFuncionario(funcionario);
+            if (this.btnCadastrar.getText().equalsIgnoreCase("editar")) {
+                this.funcionario.setNome(this.tfnome.getText());
+                this.funcionario.setCpf(this.tfcpf.getText());
+                this.funcionario.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
+                this.funcionario.setLogin(this.tflogin.getText());
+                this.funcionario.setSenha(crip(this.tfsenha.getText()));
+                this.funcionario.getEndereco().setRua(this.tfrua.getText());
+                this.funcionario.getEndereco().setCep(this.tfcep.getText());
+                this.funcionario.getEndereco().setBairro(this.tfbairro.getText());
+                this.funcionario.getEndereco().setCidade(this.tfcidade.getText());
+                this.funcionario.getEndereco().setComplemento(this.tfcomplemento.getText());
+                this.funcionario.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
+                this.funcionario.setSalario(Double.valueOf(this.tfsalario.getText()));
+                this.funcionario.setFuncao(this.tffuncao.getText());
+                this.fac.saveFuncionario(this.funcionario);
+                JOptionPane.showMessageDialog(null, "funcionario editado com sucesso!");
                 this.stage.close();
             }
         } catch (DAOException ex) {
@@ -141,8 +146,7 @@ public class ViewCadastroFuncionarioController {
         if (funcionario != null) {
             this.tfnome.setText(funcionario.getNome());
             this.tfcpf.setText(funcionario.getCpf());
-            //Não consegui converter essa porra em String!!!!!!!!!
-//            this.tfdtNascimento.setText(String.valueOf(funcionario.getDataNascimento()));
+            this.dtNascimento.setValue(LOCAL_DATE(new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getDataNascimento())));
             this.tfrua.setText(funcionario.getEndereco().getRua());
             this.tfbairro.setText(funcionario.getEndereco().getBairro());
             this.tfcep.setText(funcionario.getEndereco().getCep());
@@ -169,8 +173,7 @@ public class ViewCadastroFuncionarioController {
             this.tfsenha.setEditable(false);
             this.tffuncao.setEditable(false);
             this.tfsalario.setEditable(false);
-            //Ficou faltando a data que essa porra não da pra mexer com DATE!!!!!
-//            this.tbEditar.setVisible(true);
+            this.tbEditar.setVisible(true);
         }
     }
 
@@ -208,7 +211,9 @@ public class ViewCadastroFuncionarioController {
         }
     }
 
-    private void excluirFuncionario(Funcionario funcionario) throws DAOException {
-        fac.removeFuncionario(funcionario);
+    private static LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
     }
 }

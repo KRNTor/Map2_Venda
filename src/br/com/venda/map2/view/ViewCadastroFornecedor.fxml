@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
@@ -26,8 +27,8 @@
                      <children>
                         <HBox alignment="CENTER" focusTraversable="true" layoutY="17.0" prefHeight="83.0" prefWidth="724.0" spacing="10.0">
                            <children>
-                              <JFXTextField fx:id="tfnome" focusColor="#1ed760" labelFloat="true" prefWidth="250.0" promptText="nome" />
-                              <JFXTextField fx:id="tfcnpj" focusColor="#1ed760" labelFloat="true" prefWidth="250.0" promptText="cnpj" />
+                              <JFXTextField fx:id="tfnome" focusColor="#1ed760" labelFloat="true" prefWidth="250.0" promptText="nome" style="-fx-text-fill: #000;" />
+                              <JFXTextField fx:id="tfcnpj" focusColor="#1ed760" labelFloat="true" prefWidth="250.0" promptText="cnpj" style="-fx-text-fill: #000;" />
                            </children>
                         </HBox>
                         <Label layoutX="14.0" layoutY="6.0" text="informaçoes: fornecedor" textFill="WHITE" />
@@ -41,22 +42,37 @@
                         <Label layoutX="14.0" layoutY="6.0" text="informaçoes: endereço" textFill="WHITE" />
                         <HBox alignment="CENTER" layoutY="19.0" prefHeight="80.0" prefWidth="724.0" spacing="10.0">
                            <children>
-                              <JFXTextField fx:id="tfcep" focusColor="#1ed760" labelFloat="true" promptText="cep" />
-                              <JFXTextField fx:id="tfbairro" focusColor="#1ed760" labelFloat="true" promptText="bairro" />
-                              <JFXTextField fx:id="tfrua" focusColor="#1ed760" labelFloat="true" promptText="rua" />
-                              <JFXTextField fx:id="tfcidade" focusColor="#1ed760" labelFloat="true" promptText="cidade" />
+                              <JFXTextField fx:id="tfcep" focusColor="#1ed760" labelFloat="true" promptText="cep" style="-fx-text-fill: #000;" />
+                              <JFXTextField fx:id="tfbairro" focusColor="#1ed760" labelFloat="true" promptText="bairro" style="-fx-text-fill: #000;" />
+                              <JFXTextField fx:id="tfrua" focusColor="#1ed760" labelFloat="true" promptText="rua" style="-fx-text-fill: #000;" />
+                              <JFXTextField fx:id="tfcidade" focusColor="#1ed760" labelFloat="true" promptText="cidade" style="-fx-text-fill: #000;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutY="100.0" prefHeight="80.0" prefWidth="724.0" spacing="10.0">
                            <children>
-                              <JFXTextField fx:id="tfcomplemento" focusColor="#1ed760" labelFloat="true" promptText="complemento" />
-                              <JFXTextField fx:id="tfuf" focusColor="#1ed760" labelFloat="true" promptText="uf" />
-                              <JFXTextField fx:id="tfnumero" focusColor="#1ed760" labelFloat="true" promptText="numero" />
+                              <JFXTextField fx:id="tfcomplemento" focusColor="#1ed760" labelFloat="true" promptText="complemento" style="-fx-text-fill: #000;" />
+                              <JFXTextField fx:id="tfuf" focusColor="#1ed760" labelFloat="true" promptText="uf" style="-fx-text-fill: #000;" />
+                              <JFXTextField fx:id="tfnumero" focusColor="#1ed760" labelFloat="true" promptText="numero" style="-fx-text-fill: #000;" />
                            </children>
                         </HBox>
                      </children>
                   </Pane>
-                  <JFXButton fx:id="btnCadastrar" buttonType="RAISED" onAction="#cadastrar" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #1ED760;" text="cadastrar" textFill="WHITE" />
+                  <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="723.0" spacing="60.0">
+                     <children>
+                        <JFXButton fx:id="btnCadastrar" buttonType="RAISED" onAction="#cadastrar" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: #1ed760;" text="cadastrar" textFill="WHITE" />
+                        <JFXToggleButton fx:id="tbEditar" onAction="#setEditable" text="editar" textFill="WHITE" toggleColor="#1ed760">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets top="-10.0" />
+                           </padding>
+                        </JFXToggleButton>
+                     </children>
+                     <padding>
+                        <Insets right="80.0" top="10.0" />
+                     </padding>
+                  </HBox>
                </children>
             </VBox>
          </children>

@@ -25,7 +25,9 @@ public class GenericClienteController {
         List<GenericCliente> genericos = new ArrayList<>();
         try {
             lista.forEach(cliente -> {
-                genericos.add(new GenericCliente(cliente));
+                if (cliente.isStatus()) {
+                    genericos.add(new GenericCliente(cliente));
+                }
             });
         } catch (Exception ex) {
             Logger.getLogger(GenericClienteController.class.getName()).log(Level.SEVERE, null, ex);
