@@ -25,7 +25,9 @@ public class GenericItemController {
         List<GenericItem> genericos = new ArrayList<>();
         try {
             lista.forEach(item -> {
-                genericos.add(new GenericItem(item));
+                if (item.isStatus()) {
+                    genericos.add(new GenericItem(item));
+                }
             });
         } catch (Exception ex) {
             Logger.getLogger(GenericItemController.class.getName()).log(Level.SEVERE, null, ex);

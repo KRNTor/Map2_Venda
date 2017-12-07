@@ -25,7 +25,9 @@ public class GenericFornecedorController {
         List<GenericFornecedor> genericos = new ArrayList<>();
         try {
             lista.forEach(forn -> {
-                genericos.add(new GenericFornecedor(forn));
+                if (forn.isStatus()) {
+                    genericos.add(new GenericFornecedor(forn));
+                }
             });
         } catch (Exception ex) {
             Logger.getLogger(GenericFuncionarioController.class.getName()).log(Level.SEVERE, null, ex);

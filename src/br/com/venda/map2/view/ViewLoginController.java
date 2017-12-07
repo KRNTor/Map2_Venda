@@ -35,7 +35,11 @@ public class ViewLoginController {
             //Colocar Criptografia MD5
             Funcionario func = new Facade().getFuncionarioByLogin(this.tfLogin.getText(), CriptografiaUtil.md5(this.tfSenha.getText()));
             if (func != null) {
-                Main.showViewConta(func);
+                if (func.isStatus()) {
+                    Main.showViewConta(func);
+                } else {
+                    JOptionPane.showMessageDialog(null, "funcionario indisponível", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao logar", "ERRO", JOptionPane.ERROR_MESSAGE);
             }

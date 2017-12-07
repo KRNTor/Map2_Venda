@@ -25,7 +25,9 @@ public class GenericFuncionarioController {
         List<GenericFuncionario> genericos = new ArrayList<>();
         try {
             lista.forEach(func -> {
-                genericos.add(new GenericFuncionario(func));
+                if (func.isStatus()) {
+                    genericos.add(new GenericFuncionario(func));
+                }
             });
         } catch (Exception ex) {
             Logger.getLogger(GenericFuncionarioController.class.getName()).log(Level.SEVERE, null, ex);

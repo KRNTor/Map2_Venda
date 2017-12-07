@@ -26,7 +26,9 @@ public class GenericClienteController {
         try {
             lista.forEach(cliente -> {
                 if (cliente.isStatus()) {
-                    genericos.add(new GenericCliente(cliente));
+                    if (cliente.isStatus()) {
+                        genericos.add(new GenericCliente(cliente));
+                    }
                 }
             });
         } catch (Exception ex) {
