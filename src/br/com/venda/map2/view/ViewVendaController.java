@@ -77,7 +77,7 @@ public class ViewVendaController implements Initializable {
     private ObservableList<GenericItem> olItem;
     private ObservableList<GenericItemVenda> olItem2;
     private final GenericItemController controllerItem = new GenericItemController();
-    List<Item> listaItem = new ArrayList<>();
+    private List<Item> listaItem = new ArrayList<>();
     private List<ItemVenda> listaItemVenda = new ArrayList<>();
     private List<GenericItemVenda> listaGenItem = new ArrayList<>();
 
@@ -95,13 +95,14 @@ public class ViewVendaController implements Initializable {
             }
             Venda venda = new Venda();
             Cliente c = this.fac.getClienteByName((String) this.cbCliente.getSelectionModel().getSelectedItem());
+            c.setQtdCompras(c.getQtdCompras() + 1);
             venda.setCliente(c);
             venda.setDtVenda(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
             venda.setFuncionario(this.func);
             venda.setItem(this.listaItemVenda);
             venda.setValor(Double.valueOf(this.tfValor.getText()));
-            System.out.println("venda " + venda);
             this.fac.saveVenda(venda);
+            this.fac.updateCliente(c);
             for (Item i : this.listaItem) {
                 this.fac.updateItem(i);
             }

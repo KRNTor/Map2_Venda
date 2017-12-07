@@ -53,38 +53,38 @@ public class ViewCadastroFornecedorController implements Initializable {
     private Facade fa;
     private Stage stage;
     private Fornecedor fornecedor;
+    private Endereco end;
 
     @FXML
     public void cadastrar() {
         try {
-            if (btnCadastrar.getText().equalsIgnoreCase("cadastrar")) {
-                Fornecedor f = new Fornecedor();
-                f.setNome(this.tfnome.getText());
-                f.setCnpj(this.tfcnpj.getText());
-                Endereco end = new Endereco();
-                end.setRua(this.tfrua.getText());
-                end.setCep(this.tfcep.getText());
-                end.setBairro(this.tfbairro.getText());
-                end.setCidade(this.tfcidade.getText());
-                end.setComplemento(this.tfcomplemento.getText());
-                end.setNumero(Integer.valueOf(this.tfnumero.getText()));
-                f.setEndereco(end);
-                this.fa.saveFornecedor(f);
+            if (this.btnCadastrar.getText().equalsIgnoreCase("cadastrar")) {
+                this.fornecedor = new Fornecedor();
+                this.fornecedor.setNome(this.tfnome.getText());
+                this.fornecedor.setCnpj(this.tfcnpj.getText());
+                this.end = new Endereco();
+                this.end.setRua(this.tfrua.getText());
+                this.end.setCep(this.tfcep.getText());
+                this.end.setBairro(this.tfbairro.getText());
+                this.end.setCidade(this.tfcidade.getText());
+                this.end.setComplemento(this.tfcomplemento.getText());
+                this.end.setNumero(Integer.valueOf(this.tfnumero.getText()));
+                this.fornecedor.setEndereco(this.end);
+                this.fa.saveFornecedor(this.fornecedor);
                 JOptionPane.showMessageDialog(null, "fornecedor cadastrado com sucesso!");
                 this.stage.close();
             }
-            if (btnCadastrar.getText().equalsIgnoreCase("editar")) {
-                fornecedor.setNome(this.tfnome.getText());
-                fornecedor.setCnpj(this.tfcnpj.getText());
-                Endereco end = new Endereco();
-                end.setRua(this.tfrua.getText());
-                end.setCep(this.tfcep.getText());
-                end.setBairro(this.tfbairro.getText());
-                end.setCidade(this.tfcidade.getText());
-                end.setComplemento(this.tfcomplemento.getText());
-                end.setNumero(Integer.valueOf(this.tfnumero.getText()));
-                fornecedor.setEndereco(end);
-                this.fa.saveFornecedor(fornecedor);
+            if (this.btnCadastrar.getText().equalsIgnoreCase("editar")) {
+                this.fornecedor.setNome(this.tfnome.getText());
+                this.fornecedor.setCnpj(this.tfcnpj.getText());
+                this.end.setRua(this.tfrua.getText());
+                this.end.setCep(this.tfcep.getText());
+                this.end.setBairro(this.tfbairro.getText());
+                this.end.setCidade(this.tfcidade.getText());
+                this.end.setComplemento(this.tfcomplemento.getText());
+                this.end.setNumero(Integer.valueOf(this.tfnumero.getText()));
+                this.fornecedor.setEndereco(end);
+                this.fa.updateFornecedor(this.fornecedor);
                 JOptionPane.showMessageDialog(null, "funcionario editado com sucesso!");
                 this.stage.close();
             }
@@ -97,13 +97,9 @@ public class ViewCadastroFornecedorController implements Initializable {
         this.stage = stage;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.fa = new Facade();
-    }
-
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
+        this.end = fornecedor.getEndereco();
         fillAndLock(fornecedor);
     }
 
@@ -156,6 +152,12 @@ public class ViewCadastroFornecedorController implements Initializable {
             this.tfuf.setEditable(false);
             this.tfrua.setEditable(false);
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.fa = new Facade();
+        this.tbEditar.setVisible(false);
     }
 
 }

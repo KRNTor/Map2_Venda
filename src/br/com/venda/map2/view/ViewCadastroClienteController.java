@@ -12,13 +12,16 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
@@ -26,7 +29,7 @@ import javax.swing.JOptionPane;
  *
  * @author Computador
  */
-public class ViewCadastroClienteController {
+public class ViewCadastroClienteController implements Initializable {
 
     @FXML
     private JFXTextField tfnome;
@@ -53,7 +56,7 @@ public class ViewCadastroClienteController {
     @FXML
     private JFXToggleButton tbEditar;
 
-    private Facade fa = new Facade();
+    private Facade fac;
     private String dia;
     private String mes;
     private String ano;
@@ -73,31 +76,31 @@ public class ViewCadastroClienteController {
                 this.ano = "0002";
             }
             if (btnCadastrar.getText().equalsIgnoreCase("cadastrar")) {
-                Cliente c = new Cliente();
-                c.setNome(this.tfnome.getText());
-                c.setCpf(this.tfcpf.getText());
-                c.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
-                c.getEndereco().setRua(this.tfrua.getText());
-                c.getEndereco().setCep(this.tfcep.getText());
-                c.getEndereco().setBairro(this.tfbairro.getText());
-                c.getEndereco().setCidade(this.tfcidade.getText());
-                c.getEndereco().setComplemento(this.tfcomplemento.getText());
-                c.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
-                fa.saveCliente(c);
+                this.cliente = new Cliente();
+                this.cliente.setNome(this.tfnome.getText());
+                this.cliente.setCpf(this.tfcpf.getText());
+                this.cliente.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
+                this.cliente.getEndereco().setRua(this.tfrua.getText());
+                this.cliente.getEndereco().setCep(this.tfcep.getText());
+                this.cliente.getEndereco().setBairro(this.tfbairro.getText());
+                this.cliente.getEndereco().setCidade(this.tfcidade.getText());
+                this.cliente.getEndereco().setComplemento(this.tfcomplemento.getText());
+                this.cliente.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
+                this.fac.saveCliente(this.cliente);
                 JOptionPane.showMessageDialog(null, "cliente cadastrado com sucesso!", "cadastro cliente", JOptionPane.INFORMATION_MESSAGE);
                 this.stage.close();
             }
-            if (btnCadastrar.getText().equalsIgnoreCase("editar")) {
-                cliente.setNome(this.tfnome.getText());
-                cliente.setCpf(this.tfcpf.getText());
-                cliente.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
-                cliente.getEndereco().setRua(this.tfrua.getText());
-                cliente.getEndereco().setCep(this.tfcep.getText());
-                cliente.getEndereco().setBairro(this.tfbairro.getText());
-                cliente.getEndereco().setCidade(this.tfcidade.getText());
-                cliente.getEndereco().setComplemento(this.tfcomplemento.getText());
-                cliente.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
-                fa.saveCliente(cliente);
+            if (this.btnCadastrar.getText().equalsIgnoreCase("editar")) {
+                this.cliente.setNome(this.tfnome.getText());
+                this.cliente.setCpf(this.tfcpf.getText());
+                this.cliente.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
+                this.cliente.getEndereco().setRua(this.tfrua.getText());
+                this.cliente.getEndereco().setCep(this.tfcep.getText());
+                this.cliente.getEndereco().setBairro(this.tfbairro.getText());
+                this.cliente.getEndereco().setCidade(this.tfcidade.getText());
+                this.cliente.getEndereco().setComplemento(this.tfcomplemento.getText());
+                this.cliente.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
+                this.fac.updateCliente(this.cliente);
                 JOptionPane.showMessageDialog(null, "cliente editado com sucesso!", "cadastro cliente", JOptionPane.INFORMATION_MESSAGE);
                 this.stage.close();
 
@@ -131,7 +134,6 @@ public class ViewCadastroClienteController {
             this.tfcidade.setText(cliente.getEndereco().getCidade());
             this.tfcomplemento.setText(cliente.getEndereco().getComplemento());
             this.tfnumero.setText(String.valueOf(cliente.getEndereco().getNumero()));
-
             this.btnCadastrar.setText("editar");
             //--------------lock--------------
             this.tfnome.setEditable(true);
@@ -177,5 +179,11 @@ public class ViewCadastroClienteController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.fac = new Facade();
+        this.tbEditar.setVisible(false);
     }
 }

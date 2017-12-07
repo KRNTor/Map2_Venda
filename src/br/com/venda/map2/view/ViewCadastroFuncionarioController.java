@@ -21,15 +21,18 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import br.com.venda.map2.util.CriptografiaUtil;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Computador
  */
-public class ViewCadastroFuncionarioController {
+public class ViewCadastroFuncionarioController implements Initializable {
 
     @FXML
     private JFXTextField tfnome;
@@ -64,7 +67,7 @@ public class ViewCadastroFuncionarioController {
     @FXML
     private JFXToggleButton tbEditar;
 
-    private Facade fac = new Facade();
+    private Facade fac;
     private String dia;
     private String mes;
     private String ano;
@@ -107,7 +110,11 @@ public class ViewCadastroFuncionarioController {
                 this.funcionario.setCpf(this.tfcpf.getText());
                 this.funcionario.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
                 this.funcionario.setLogin(this.tflogin.getText());
-                this.funcionario.setSenha(crip(this.tfsenha.getText()));
+                if (this.tfsenha.getText().isEmpty()) {
+                    this.funcionario.setSenha(this.funcionario.getSenha());
+                } else {
+                    this.funcionario.setSenha(crip(this.tfsenha.getText()));
+                }
                 this.funcionario.getEndereco().setRua(this.tfrua.getText());
                 this.funcionario.getEndereco().setCep(this.tfcep.getText());
                 this.funcionario.getEndereco().setBairro(this.tfbairro.getText());
@@ -215,5 +222,11 @@ public class ViewCadastroFuncionarioController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.fac = new Facade();
+        this.tbEditar.setVisible(false);
     }
 }
