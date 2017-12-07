@@ -123,7 +123,7 @@ public class ViewCadastroFuncionarioController implements Initializable {
                 this.funcionario.getEndereco().setNumero(Integer.valueOf(this.tfnumero.getText()));
                 this.funcionario.setSalario(Double.valueOf(this.tfsalario.getText()));
                 this.funcionario.setFuncao(this.tffuncao.getText());
-                this.fac.saveFuncionario(this.funcionario);
+                this.fac.updateFuncionario(this.funcionario);
                 JOptionPane.showMessageDialog(null, "funcionario editado com sucesso!");
                 this.stage.close();
             }
