@@ -77,7 +77,8 @@ public class ViewVendaController implements Initializable {
     private ObservableList<GenericItem> olItem;
     private ObservableList<GenericItemVenda> olItem2;
     private final GenericItemController controllerItem = new GenericItemController();
-    private List<ItemVenda> listaItem = new ArrayList<>();
+    List<Item> listaItem = new ArrayList<>();
+    private List<ItemVenda> listaItemVenda = new ArrayList<>();
     private List<GenericItemVenda> listaGenItem = new ArrayList<>();
 
     @FXML
@@ -97,10 +98,13 @@ public class ViewVendaController implements Initializable {
             venda.setCliente(c);
             venda.setDtVenda(new SimpleDateFormat("dd/MM/yyyy").parse(dia + '/' + mes + '/' + ano));
             venda.setFuncionario(this.func);
-            venda.setItem(this.listaItem);
+            venda.setItem(this.listaItemVenda);
             venda.setValor(Double.valueOf(this.tfValor.getText()));
             System.out.println("venda " + venda);
             this.fac.saveVenda(venda);
+            for (Item i : this.listaItem) {
+                this.fac.updateItem(i);
+            }
             JOptionPane.showMessageDialog(null, "venda realizada com sucesso!");
             this.stage.close();
         } catch (DAOException ex) {
@@ -120,15 +124,37 @@ public class ViewVendaController implements Initializable {
             this.tableItem.setItems(this.olItem);
             this.tableItem.setRowFactory(tv -> {
                 TableRow<GenericItem> row = new TableRow<>();
-
                 row.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && (!row.isEmpty())) {
                         try {
                             String qunt = JOptionPane.showInputDialog("informe a quantidade:");
+                            System.out.println("lista Item: " + this.listaItem);
                             GenericItem rowData = row.getItem();
                             Item item = this.fac.getItemByName(rowData.getNome());
+                            if (Integer.valueOf(qunt) > item.getQuantidade()) {
+                                JOptionPane.showMessageDialog(null, "quantidade de item inferior ao estoque!");
+                                return;
+                            }
+                            if (Integer.valueOf(qunt) == item.getQuantidade()) {
+                                JOptionPane.showMessageDialog(null, "será o ultimo item em estoque!");
+                            }
                             ItemVenda iVenda = initItemVenda(item, Integer.valueOf(qunt));
                             this.listaGenItem.add(new GenericItemVenda(iVenda));
+                            item.setQuantidade(item.getQuantidade() - Integer.valueOf(qunt));
+                            this.listaItem.add(item);
+                            if (this.listaItem.contains(item)) {
+                                for (Item i : this.listaItem) {
+                                    if (i.getNome().endsWith(item.getNome())) {
+                                        if (Integer.valueOf(qunt) > i.getQuantidade()) {
+                                            JOptionPane.showMessageDialog(null, "quantidade de item inferior ao estoque!");
+                                            return;
+                                        }
+                                        if (Integer.valueOf(qunt) == item.getQuantidade()) {
+                                            JOptionPane.showMessageDialog(null, "será o ultimo item em estoque!");
+                                        }
+                                    }
+                                }
+                            }
                             preencherTableItemCart(this.listaGenItem);
                             this.value = this.value + (item.getPrecoVendaItem() * Integer.valueOf(qunt));
                             this.tfValor.setText("" + this.value);
@@ -152,7 +178,7 @@ public class ViewVendaController implements Initializable {
         itemVenda.setPrecoVendaItem(item.getPrecoVendaItem());
         itemVenda.setQuantidade_saida(qunt);
         itemVenda.setValidade(item.getValidade());
-        this.listaItem.add(itemVenda);
+        this.listaItemVenda.add(itemVenda);
         return itemVenda;
     }
 

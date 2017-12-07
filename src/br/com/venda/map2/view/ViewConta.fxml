@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -81,11 +80,6 @@
                                        <children>
                                           <JFXButton buttonType="RAISED" onAction="#showCadCliente" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="cadastrar cliente" textFill="WHITE" />
                                           <JFXButton buttonType="RAISED" onAction="#deleteClienteRow" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="Excluir cliente" textFill="WHITE" />
-                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar cliente (nome)">
-                                             <HBox.margin>
-                                                <Insets left="180.0" top="25.0" />
-                                             </HBox.margin>
-                                          </JFXTextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets />
@@ -115,11 +109,6 @@
                                        <children>
                                           <JFXButton buttonType="RAISED" onAction="#showCadFuncionario" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="cadastrar funcionario" textFill="WHITE" />
                                           <JFXButton buttonType="RAISED" onAction="#deleteFuncionarioRow" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="Excluir funcionario" textFill="WHITE" />
-                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar funcinario (nome)">
-                                             <HBox.margin>
-                                                <Insets left="180.0" top="25.0" />
-                                             </HBox.margin>
-                                          </JFXTextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets />
@@ -149,11 +138,6 @@
                                        <children>
                                           <JFXButton buttonType="RAISED" onAction="#showCadFornecedor" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="cadastrar fornecedor" textFill="WHITE" />
                                           <JFXButton buttonType="RAISED" onAction="#deleteFornecedorRow" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="Excluir fornecedor" textFill="WHITE" />
-                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar funcinario (nome)">
-                                             <HBox.margin>
-                                                <Insets left="180.0" top="25.0" />
-                                             </HBox.margin>
-                                          </JFXTextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets />
@@ -183,11 +167,6 @@
                                        <children>
                                           <JFXButton buttonType="RAISED" onAction="#showCadItem" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="cadastrar item" textFill="WHITE" />
                                           <JFXButton buttonType="RAISED" onAction="#deleteItemRow" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="Excluir item" textFill="WHITE" />
-                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar item (nome)">
-                                             <HBox.margin>
-                                                <Insets left="180.0" top="25.0" />
-                                             </HBox.margin>
-                                          </JFXTextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets />
@@ -217,11 +196,6 @@
                                        <children>
                                           <JFXButton buttonType="RAISED" onAction="#showCadVenda" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="registrar venda" textFill="WHITE" />
                                           <JFXButton buttonType="RAISED" prefHeight="79.0" prefWidth="194.0" style="-fx-background-color: #1ED760;" text="visualizar venda" textFill="WHITE" />
-                                          <JFXTextField focusColor="#1ed760" labelFloat="true" prefHeight="24.0" prefWidth="359.0" promptText="buscar venda (nome cliente)">
-                                             <HBox.margin>
-                                                <Insets left="180.0" top="25.0" />
-                                             </HBox.margin>
-                                          </JFXTextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets />
